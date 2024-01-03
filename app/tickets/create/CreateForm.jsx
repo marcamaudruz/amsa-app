@@ -1,9 +1,8 @@
 import { addTicket } from "../../lib/actions";
 
 export default function CreateForm() {
-
     return (
-        <form onSubmit={addTicket} className="w-1/2">
+        <form action={addTicket} className="w-1/2">
         <label>
             <span>titre:</span>
             <input

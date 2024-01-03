@@ -15,6 +15,7 @@ export default function Navbar() {
       <h1>amsa-app</h1>
       <Link href="/">Accueil</Link>
       <Link href="/tickets">Frais</Link>
+      <Link href="/users">Users</Link>
     </nav>
   )
 }
