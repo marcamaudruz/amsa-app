@@ -1,7 +1,9 @@
 import { Ticket, User } from "./models";
 import { connectToDB } from "./utils";
+import { unstable_noStore as noStore } from 'next/cache';
 
 export const fetchUsers = async () => {
+  noStore();
   try {
     connectToDB();
     const users = await User.find()
@@ -13,6 +15,8 @@ export const fetchUsers = async () => {
 };
 
 export const fetchTickets = async () => {
+  noStore();
+
   try {
     connectToDB();
     const tickets = await Ticket.find()
@@ -24,6 +28,8 @@ export const fetchTickets = async () => {
 };
 
 export const fetchTicket = async (id) => {
+  noStore();
+
   try {
     connectToDB();
     const ticket = await Ticket.findById(id);
@@ -35,6 +41,8 @@ export const fetchTicket = async (id) => {
 };
 
 export const fetchCards = async () => {
+  noStore();
+
   try {
     connectToDB();
     
