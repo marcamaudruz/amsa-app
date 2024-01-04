@@ -50,3 +50,22 @@ export const fetchCards = async () => {
     throw new Error("Failed to fetch tickets!");
   }
 };
+
+export const seed = async () => {
+  
+  const {
+    users,
+    tickets,
+  } = require('./placeholder-data.js');
+
+  try {
+    connectToDB();
+
+    console.log(tickets)
+
+    await Ticket.insertMany(tickets)
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to create ticket!");
+  }
+}

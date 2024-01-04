@@ -1,11 +1,8 @@
-import { fetchCards } from '../lib/data'
+import { fetchCards, seed } from '../lib/data'
 
 export default async function DashboardPage() {
-
   const data = await fetchCards()
-  console.log(data.nombreUsers)
-  console.log(data.totalPrix)
-  
+  //await seed()
   return (
    <>
       <p>Coût total des notes de frais: {data.totalPrix}</p>
