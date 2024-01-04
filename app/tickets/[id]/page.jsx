@@ -2,8 +2,8 @@ import { fetchTicket } from "../../lib/data"
 
 export default async function TicketDetails({ params }) {
   const ticket = await fetchTicket(params.id)
-  const date = new Date(ticket.createdAt);
-  console.log(date)
+  const date = (ticket.createdAt).toLocaleString();
+  console.log(ticket.titre)
   return (
     <main>
       <nav>
@@ -17,7 +17,7 @@ export default async function TicketDetails({ params }) {
         <p>Affaire: {ticket.affaire}</p>
         <p>Montant: {ticket.prix}</p>
         <p>Justificatif: {ticket.img}</p>
-        <p>{date}</p>
+        <p>Date de création: {date}</p>
         <div className={`pill ${ticket.status}`}>
           {ticket.status}
         </div>
