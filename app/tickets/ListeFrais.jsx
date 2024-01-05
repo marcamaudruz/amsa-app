@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { fetchTickets } from '../lib/data'
 import { deleteTicket } from "../lib/actions"
+import { SubmitButton } from "../components/Submit-button"
 
 export default async function ListeFrais  () {
   const {tickets} = await await fetchTickets()
@@ -20,7 +21,7 @@ export default async function ListeFrais  () {
           </Link>
           <form action={deleteTicket}>
             <input type="hidden" name="id" value={ticket.id} />
-            <button>Delete</button>
+            <SubmitButton name={"delete"} />
           </form>
         </div>
       ))}

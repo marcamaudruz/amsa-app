@@ -51,7 +51,7 @@ export default function CreateForm() {
             />
         </label>
         {/* <button type="submit">Submit</button> */}
-        <SubmitButton/>
+        <SubmitButton name={"ajouter"}/>
     </form>
 
     )
