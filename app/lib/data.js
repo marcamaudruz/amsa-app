@@ -19,7 +19,7 @@ export const fetchTickets = async () => {
 
   try {
     connectToDB();
-    const tickets = await Ticket.find()
+    const tickets = await Ticket.find().sort({createdAt: -1})
     return { tickets };
   } catch (err) {
     console.log(err);
