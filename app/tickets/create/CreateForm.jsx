@@ -1,4 +1,6 @@
 import { addTicket } from "../../lib/actions";
+import { SubmitButton } from '../../components/Submit-button'
+
 
 export default function CreateForm() {
     return (
@@ -48,7 +50,8 @@ export default function CreateForm() {
             name="prix"
             />
         </label>
-        <button type="submit">Submit</button>
+        {/* <button type="submit">Submit</button> */}
+        <SubmitButton/>
     </form>
 
     )
