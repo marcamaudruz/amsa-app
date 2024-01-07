@@ -3,15 +3,8 @@
 import React from "react";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarMenuToggle,NavbarMenu, NavbarMenuItem } from "@nextui-org/react";
 
-export default function App() {
+export default function Navbar2() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
-  const menuItems = [
-    " ",
-    "Dashboard",
-    "Frais",
-    "Utilisateurs",
-  ];
 
   const menuItems2 = [
     {
@@ -33,6 +26,12 @@ export default function App() {
   ];
 
   return (
+    // <div>
+    //     <Link href="dashboard">dashboard</Link>
+    //     <Link href="tickets">dashboard</Link>
+    //     <Link href="dashboard">dashboard</Link>
+    // </div>
+
     <Navbar onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
