@@ -4,7 +4,7 @@
 
 /* base styles */
 body {
-    background: #ebf0fa;
+    /* background: #ebf0fa; */
     @apply text-gray-500 m-8;
   }
   h1, h2 {
@@ -21,7 +21,7 @@ body {
   }
   
   /* nav styles */
-  nav {
+  /* nav {
     @apply
       pb-4
       border-b-2 border-gray-200
@@ -37,10 +37,10 @@ body {
   }
   main nav {
     @apply border-0;
-  }
+  } */
   
   /* button styles */
-  button {
+  /* button {
     @apply 
       px-3 py-2 
       rounded-sm 
@@ -55,10 +55,10 @@ body {
   }
   .btn-secondary {
     @apply bg-gray-200 text-gray-900;
-  }
+  } */
   
   /* form styles */
-  form {
+  /* form {
     @apply 
       py-4 px-7 
       bg-primary 
@@ -81,7 +81,7 @@ body {
   }
   form button {
     @apply block mx-auto;
-  }
+  } */
   
   /* feedback styles */
   .error {
@@ -100,7 +100,9 @@ body {
   /* card styles */
   .card {
     @apply 
-      bg-white 
+      /* bg-white  */
+      border-1
+      border-gray-500
       shadow-sm 
       rounded-md 
       py-3 px-4 my-4 

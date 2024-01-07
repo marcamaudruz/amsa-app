@@ -1,4 +1,5 @@
 import Link from "next/link";
+import {Button} from '@nextui-org/button'; 
 
 export default function Home() {
   return (
@@ -8,7 +9,7 @@ export default function Home() {
 
     <div className="flex justify-center my-8">
       <Link href="/dashboard">
-        <button className="btn-primary">Dashboard</button>
+        <Button>Dashboard</Button>
       </Link>
     </div>
 

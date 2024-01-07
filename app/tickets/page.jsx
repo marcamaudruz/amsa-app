@@ -2,6 +2,8 @@ import { Suspense } from "react";
 import Loading from "../loading";
 import Link from "next/link"
 import ListeFrais from "./ListeFrais";
+import { SubmitButton } from "../components/Submit-button"
+
 
 export default function Tickets() {
   return (
@@ -13,7 +15,9 @@ export default function Tickets() {
       </nav>
       <div className="flex justify-center my-8">
         <Link href="/tickets/create">
-          <button className="btn-primary">Ajouter une Note de frais</button>
+          {/* <button className="btn-primary">Ajouter une Note de frais</button> */}
+          <SubmitButton name={"Ajouter une Note de frais"} />
+
         </Link>
       </div>
       <p><small>Note de frais actuellement ouverte</small></p>

@@ -1,13 +1,13 @@
 'use client'
  
+import {Button} from '@nextui-org/button'; 
 import { useFormStatus } from 'react-dom'
  
 export function SubmitButton({name}) {
   const { pending } = useFormStatus()
-console.log(name)
   return (
-    <button type="submit" disabled={pending}>
+    <Button type="submit" disabled={pending}>
       {pending ? 'traitement...' : name } 
-    </button>
+    </Button>
   )
 }
