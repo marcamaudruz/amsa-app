@@ -1,24 +1,24 @@
 import { fetchUsers } from '../lib/data'
+import UserTable from './userTable'
 
 export default async function UsersPage() {
 
-  const {users} = await await fetchUsers() //pourquoi retourne pas un array ??
+  const { users } = await await fetchUsers() //pourquoi retourne pas un array ??
 
   return (
-   <main>
+    <main>
       <nav>
         <div>
           <h2>Utilisateurs</h2>
         </div>
       </nav>
-      {users?.map((user) => (
-        <div key={user.id}>
-          <p>{user.username + user.id}</p>
-        </div>        
-      ))}
+      
       {users.lenght === 0 && (
         <p>no users</p>
       )}
-   </main>
+
+        <UserTable users={users} />
+
+    </main>
   )
 }
