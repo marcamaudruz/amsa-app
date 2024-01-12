@@ -1,9 +1,8 @@
 import { Suspense } from "react";
 import Loading from "../loading";
-import Link from "next/link"
-import ListeFrais from "./ListeFrais";
-import { SubmitButton } from "../components/Submit-button"
-
+import Link from "next/link";
+import ListeFrais from "./ListeFrais2";
+import { SubmitButton } from "../components/Submit-button";
 
 export default function Tickets() {
   return (
@@ -18,12 +17,13 @@ export default function Tickets() {
           <SubmitButton name={"Ajouter une Note de frais"} />
         </Link>
       </div>
-      <p><small>Note de frais actuellement ouverte</small></p>
-      
-      <Suspense fallback={<Loading/>}>
+      <p>
+        <small>Note de frais actuellement ouverte</small>
+      </p>
+
+      <Suspense fallback={<Loading />}>
         <ListeFrais />
       </Suspense>
-      
     </main>
-  )
+  );
 }
