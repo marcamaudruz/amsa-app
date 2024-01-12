@@ -76,7 +76,7 @@ export default function Home() {
                 </li>
                 <li className="text-white">
                   <Link href="/users" onClick={() => setNavbar(!navbar)}>
-                    Utilisateurs
+                    Utilisateurss
                   </Link>
                 </li>
               </ul>
