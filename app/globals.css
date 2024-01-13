@@ -16,9 +16,6 @@ body {
   main > h2 {
     @apply mb-4 pb-2 text-base ;
   }
-  p > a {
-    @apply text-primary underline;
-  }
   
   /* nav styles */
   /* nav {
@@ -121,21 +118,15 @@ body {
   /* pill styles */
   .pill {
     @apply 
-      py-1 px-2 mt-3
-      inline-block 
+      
       text-xs font-semibold;
   }
   .pill.refusé {
-    @apply bg-red-300 text-red-600;
+    @apply text-red-600;
   }
   .pill.attente {
-    @apply bg-blue-300 text-blue-600;
+    @apply text-blue-600;
   }
   .pill.compta {
-    @apply bg-emerald-300 text-emerald-600;
-  }
-  .card .pill {
-    @apply 
-      absolute bottom-0 right-0 
-      rounded-tl-md;
+    @apply text-emerald-600;
   }
