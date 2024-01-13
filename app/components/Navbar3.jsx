@@ -11,7 +11,7 @@ export default function Home() {
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
-              <Link href="#">
+              <Link href="/dashboard">
                 <h2 className="text-2xl text-white font-bold">AMSA-APP</h2>
               </Link>
               <div className="md:hidden">
@@ -76,7 +76,7 @@ export default function Home() {
                 </li>
                 <li className="text-white">
                   <Link href="/users" onClick={() => setNavbar(!navbar)}>
-                    Utilisateurss
+                    Utilisateurs
                   </Link>
                 </li>
               </ul>
