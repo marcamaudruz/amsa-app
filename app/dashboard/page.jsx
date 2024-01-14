@@ -13,7 +13,7 @@ export default async function DashboardPage() {
           <h2>Dashboard</h2>
         </div>
       </nav>
-      <div className="mt-10 grid place-items-center">
+      <div className="mt-10 6666grid place-items-center">
         <Card className="w-48">
           <CardHeader className="h-14 pb-0 pt-2 px-4 flex-col">
             <svg dataSlot="icon" fill="none" strokeWidth={1.5} stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
