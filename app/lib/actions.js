@@ -26,27 +26,49 @@ export const addTicket = async (formData) => {
   // console.log("Response: " + blob.url);
   // const img = blob.url;
 
-  // Upload image to Cloudinary
-  const file = imageFile;
-  const arrayBuffer = await file.arrayBuffer();
-  const buffer = new Uint8Array(arrayBuffer);
-  const res = await new Promise((resolve, reject) => {
-    cloudinary.uploader
-      .upload_stream(
-        {
-          tags: ["nextjs-server-actions-upload-tickets"],
-        },
-        function (error, result) {
-          if (error) {
-            reject(error);
-            return;
-          }
-          resolve(result);
-        }
-      )
-      .end(buffer);
+  // Upload image to Cloudinary with upload_stream (problem in Vercel)
+  // const file = imageFile;
+  // const arrayBuffer = await file.arrayBuffer();
+  // const buffer = new Uint8Array(arrayBuffer);
+  // const res = await new Promise((resolve, reject) => {
+  //   cloudinary.uploader
+  //     .upload_stream(
+  //       {
+  //         tags: ["nextjs-server-actions-upload-tickets"],
+  //       },
+  //       function (error, result) {
+  //         if (error) {
+  //           reject(error);
+  //           return;
+  //         }
+  //         resolve(result);
+  //       }
+  //     )
+  //     .end(buffer);
+  // });
+  // const img = (await res).url;
+
+  // Upload image to Cloudinary with upload
+  const fileBuffer = await imageFile.arrayBuffer();
+  var mime = imageFile.type;
+  var encoding = 'base64';
+  var base64Data = Buffer.from(fileBuffer).toString('base64');
+  var fileUri = 'data:' + mime + ';' + encoding + ',' + base64Data;
+  const result = await new Promise((resolve, reject) => {
+    var result = cloudinary.uploader.upload(fileUri, {
+      invalidate: true
+    })
+      .then((result) => {
+        console.log(result);
+        resolve(result);
+      })
+      .catch((error) => {
+        console.log(error);
+        reject(error);
+      });
   });
-  const img = (await res).url;
+  let img = result.secure_url;
+  console.log(img)
 
   // Connect to DB
   try {
