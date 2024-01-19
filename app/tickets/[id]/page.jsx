@@ -134,17 +134,19 @@ export default async function TicketDetails({ params }) {
               </dt>
               <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                 {ticket.img && (
-                  <Image
-                    src={ticket.img}
-                    width={500}
-                    height={500}
-                    alt="Frais"
-                  />
+                  <Link href={ticket.img}>
+                    <Image
+                      src={ticket.img}
+                      width={500}
+                      height={500}
+                      alt="Frais"
+                    />
+                  </Link>
                 )}
                 {!ticket.img && (
                   <Image
                     src={
-                      "https://xjnpfn6v2fle0szp.public.blob.vercel-storage.com/no-image-ZK6UaO7RX1rjNEF4GypM5GWH8Uq4xh.png"
+                      "https://res.cloudinary.com/dkzvyfx4u/image/upload/v1705440603/cld-sample-5.jpg"
                     }
                     width={100}
                     height={100}
