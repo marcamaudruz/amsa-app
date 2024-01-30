@@ -18,14 +18,6 @@ export const addTicket = async (formData) => {
     Object.fromEntries(formData);
   const imageFile = image;
 
-  // Upload image to Vercel
-  // const blob = await put(imageFile.name, imageFile, {
-  //   access: "public",
-  // });
-  // console.log("Response: " + blob.pathname);
-  // console.log("Response: " + blob.url);
-  // const img = blob.url;
-
   // Upload image to Cloudinary
   const file = imageFile;
   const arrayBuffer = await file.arrayBuffer();
