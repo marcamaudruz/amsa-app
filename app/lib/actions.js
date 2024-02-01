@@ -17,29 +17,7 @@ export const addTicket = async (formData) => {
   const { titre, categorie, desc, affaire, prix, status, image, user } =
     Object.fromEntries(formData);
   const imageFile = image;
-
-  // Upload image to Cloudinary with upload_stream (problem in Vercel)
-  // const file = imageFile;
-  // const arrayBuffer = await file.arrayBuffer();
-  // const buffer = new Uint8Array(arrayBuffer);
-  // const res = await new Promise((resolve, reject) => {
-  //   cloudinary.uploader
-  //     .upload_stream(
-  //       {
-  //         tags: ["nextjs-server-actions-upload-tickets"],
-  //       },
-  //       function (error, result) {
-  //         if (error) {
-  //           reject(error);
-  //           return;
-  //         }
-  //         resolve(result);
-  //       }
-  //     )
-  //     .end(buffer);
-  // });
-  // const img = (await res).url;
-
+  console.log("user: ", user);
   // Upload image to Cloudinary with upload
   const fileBuffer = await imageFile.arrayBuffer();
   var mime = imageFile.type;
@@ -74,7 +52,7 @@ export const addTicket = async (formData) => {
       prix,
       status: "attente",
       img,
-      user: "MAA",
+      user,
     });
     console.log(newTicket);
     await newTicket.save();

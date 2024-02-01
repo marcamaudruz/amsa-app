@@ -82,9 +82,23 @@ export default function Navbar() {
                   </Link>
                 </li>
                 {session ? (
-                  <Link href="/api/auth/signout?callbackUrl=/">Logout</Link>
+                  <li className="text-white">
+                    <Link
+                      href="/api/auth/signout?callbackUrl=/"
+                      onClick={() => setNavbar(!navbar)}
+                    >
+                      Logout
+                    </Link>
+                  </li>
                 ) : (
-                  <Link href="/api/auth/signin">Login</Link>
+                  <li className="text-white">
+                    <Link
+                      href="/api/auth/signin"
+                      onClick={() => setNavbar(!navbar)}
+                    >
+                      Login
+                    </Link>
+                  </li>
                 )}
               </ul>
             </div>

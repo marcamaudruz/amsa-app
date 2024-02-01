@@ -3,10 +3,12 @@ import { SubmitButton } from "../../components/Submit-button";
 import { put } from "@vercel/blob";
 import { revalidatePath } from "next/cache";
 
-export default function CreateForm() {
+export default function CreateForm({ user }) {
+  console.log(user.username);
   return (
     <div className="grid place-items-center">
       <form action={addTicket} className="w-full max-w-sm">
+        <input type="hidden" name="user" value={user.username} />
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3">
             <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
