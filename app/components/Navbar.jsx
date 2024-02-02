@@ -87,7 +87,7 @@ export default function Navbar() {
                       href="/api/auth/signout?callbackUrl=/"
                       onClick={() => setNavbar(!navbar)}
                     >
-                      Logout
+                      Logout ({session.user.role})
                     </Link>
                   </li>
                 ) : (

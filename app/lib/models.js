@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      min: 3,
+      min: 2,
       max: 20,
     },
     email: {
@@ -44,7 +44,6 @@ const ticketSchema = new mongoose.Schema(
     titre: {
       type: String,
       required: true,
-      unique: true,
     },
     categorie: {
       type: String,
@@ -68,6 +67,9 @@ const ticketSchema = new mongoose.Schema(
       required: true,
     },
     img: {
+      type: String,
+    },
+    img_public_id: {
       type: String,
     },
     user: {

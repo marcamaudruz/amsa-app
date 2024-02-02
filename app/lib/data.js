@@ -1,12 +1,12 @@
 import { Ticket, User } from "./models";
 import { connectToDB } from "./utils";
-import { unstable_noStore as noStore } from 'next/cache';
+import { unstable_noStore as noStore } from "next/cache";
 
 export const fetchUsers = async () => {
   noStore();
   try {
     connectToDB();
-    const users = await User.find()
+    const users = await User.find();
     return { users };
   } catch (err) {
     console.log(err);
@@ -19,7 +19,28 @@ export const fetchTickets = async () => {
 
   try {
     connectToDB();
-    const tickets = await Ticket.find().sort({createdAt: -1})
+    const tickets = await Ticket.find().sort({ createdAt: -1 });
+    return { tickets };
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch tickets!");
+  }
+};
+
+export const fetchTicketsByUser = async (user) => {
+  noStore();
+
+  try {
+    connectToDB();
+    // console.log(user);
+    let tickets = null;
+    if (user.role === "admin")
+      tickets = await Ticket.find().sort({ createdAt: -1 });
+    else
+      tickets = await Ticket.find({ user: user.username }).sort({
+        createdAt: -1,
+      });
+    // console.log(tickets);
     return { tickets };
   } catch (err) {
     console.log(err);
@@ -45,14 +66,16 @@ export const fetchCards = async () => {
 
   try {
     connectToDB();
-    
-    const tickets = await Ticket.find()
-    let totalPrix = 0
-    tickets.map((ticket) => { totalPrix += ticket.prix })
+
+    const tickets = await Ticket.find();
+    let totalPrix = 0;
+    tickets.map((ticket) => {
+      totalPrix += ticket.prix;
+    });
 
     const nombreUsers = await User.countDocuments();
-    
-    return {nombreUsers, totalPrix};
+
+    return { nombreUsers, totalPrix };
   } catch (err) {
     console.log(err);
     throw new Error("Failed to fetch tickets!");
@@ -60,20 +83,16 @@ export const fetchCards = async () => {
 };
 
 export const seed = async () => {
-  
-  const {
-    users,
-    tickets,
-  } = require('./placeholder-data.js');
+  const { users, tickets } = require("./placeholder-data.js");
 
   try {
     connectToDB();
 
-    console.log(tickets)
+    console.log(tickets);
 
-    await Ticket.insertMany(tickets)
+    await Ticket.insertMany(tickets);
   } catch (err) {
     console.log(err);
     throw new Error("Failed to create ticket!");
   }
-}
+};

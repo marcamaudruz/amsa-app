@@ -5,7 +5,7 @@ import { Ticket, User } from "./models";
 import { connectToDB } from "./utils";
 import { redirect } from "next/navigation";
 import { v2 as cloudinary } from "cloudinary";
-import { put } from "@vercel/blob";
+import bcrypt from "bcrypt";
 
 cloudinary.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
@@ -30,7 +30,7 @@ export const addTicket = async (formData) => {
         invalidate: true,
       })
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         resolve(result);
       })
       .catch((error) => {
@@ -38,8 +38,12 @@ export const addTicket = async (formData) => {
         reject(error);
       });
   });
-  let img = result.secure_url;
-  console.log(img);
+  let img = result.url;
+  let img_public_id = result.public_id;
+
+  // console.log("result", result);
+  console.log("img", img);
+  console.log("img_public_id", img_public_id);
 
   // Connect to DB
   try {
@@ -52,6 +56,7 @@ export const addTicket = async (formData) => {
       prix,
       status: "attente",
       img,
+      img_public_id,
       user,
     });
     console.log(newTicket);
@@ -65,13 +70,44 @@ export const addTicket = async (formData) => {
 };
 
 export const addUser = async (formData) => {
-  console.log("dans addUser");
+  const { username, email, password_from_field, isAdmin } =
+    Object.fromEntries(formData);
+
+  // Connect to DB
+  try {
+    connectToDB();
+    const password = await bcrypt.hash(password_from_field, 10);
+
+    const newUser = new User({
+      username,
+      email,
+      password,
+      phone: 1,
+      isAdmin,
+      isActive: true,
+      adresse: "asd",
+    });
+    await newUser.save();
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to create User!");
+  }
+  redirect("/");
 };
 
 export const deleteTicket = async (formData) => {
   const { id } = Object.fromEntries(formData);
   try {
     connectToDB();
+
+    // get ticket
+    const ticket = await Ticket.findById(id);
+    const img_public_id = ticket.img_public_id;
+    console.log(img_public_id);
+    cloudinary.uploader
+      .destroy(img_public_id)
+      .then((result) => console.log(result));
+
     await Ticket.findByIdAndDelete(id);
   } catch (err) {
     console.log(err);

@@ -3,8 +3,17 @@ import Loading from "../loading";
 import Link from "next/link";
 import ListeFrais from "./ListeFrais2";
 import { SubmitButton } from "../components/Submit-button";
+import { getServerSession } from "next-auth";
+import { options } from "../api/auth/[...nextauth]/options";
+import { redirect } from "next/navigation";
 
-export default function Tickets() {
+export default async function Tickets() {
+  const session = await getServerSession(options);
+
+  if (!session) {
+    redirect("/api/auth/signin?callbackUrl=/tickets");
+  }
+
   return (
     <main>
       <nav>
@@ -22,7 +31,7 @@ export default function Tickets() {
       </p>
 
       <Suspense fallback={<Loading />}>
-        <ListeFrais />
+        <ListeFrais user={session.user} />
       </Suspense>
     </main>
   );

@@ -20,8 +20,11 @@ export default async function UsersPage() {
       <nav>
         <div>
           <h2>Utilisateurs</h2>
-          <p>Name: {session.user.username}</p>
-          <p>Role: {session.user.role}</p>
+          <div className="pt-5">
+            <h3>Mes données</h3>
+            <p>Name: {session.user.username}</p>
+            <p>Role: {session.user.role}</p>
+          </div>
         </div>
       </nav>
       <div className="flex justify-center my-8">
