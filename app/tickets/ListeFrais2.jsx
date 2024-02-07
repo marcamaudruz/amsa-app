@@ -13,11 +13,11 @@ export default async function ListeFrais2({ user }) {
   return (
     <>
       {/* Version laptop */}
-      <div className="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
+      <div className="hidden md:block relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
         <table className="w-full text-left table-auto min-w-max">
           <thead>
             <tr>
-              <th className="hidden md:block p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+              <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                 <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
                   Utilisateur
                 </p>
@@ -27,7 +27,7 @@ export default async function ListeFrais2({ user }) {
                   Titre
                 </p>
               </th>
-              <th className="hidden md:block p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+              <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                 <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
                   Catégorie
                 </p>
@@ -42,7 +42,7 @@ export default async function ListeFrais2({ user }) {
                   Status
                 </p>
               </th>
-              <th className="hidden md:block p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+              <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                 <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
                   Action
                 </p>
@@ -52,7 +52,7 @@ export default async function ListeFrais2({ user }) {
           <tbody>
             {tickets?.map((ticket) => (
               <tr key={ticket.id}>
-                <td className="hidden md:block p-4 border-b border-blue-gray-50">
+                <td className="p-4 border-b border-blue-gray-50">
                   <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                     {ticket.user}
                   </p>
@@ -69,7 +69,7 @@ export default async function ListeFrais2({ user }) {
                     </Link>
                   </p>
                 </td>
-                <td className="hidden md:block p-4 border-b border-blue-gray-50 ">
+                <td className="p-4 border-b border-blue-gray-50 ">
                   <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                     {ticket.categorie}
                   </p>
@@ -82,7 +82,7 @@ export default async function ListeFrais2({ user }) {
                 <td className="p-4 border-b border-blue-gray-50 ">
                   <div className={`pill ${ticket.status}`}>{ticket.status}</div>
                 </td>
-                <td className="hidden md:block p-4 border-b border-blue-gray-50">
+                <td className="p-4 border-b border-blue-gray-50">
                   <form action={deleteTicket} className="pl-1">
                     <input type="hidden" name="id" value={ticket.id} />
                     <SubmitButton name={"delete"} />
@@ -97,22 +97,14 @@ export default async function ListeFrais2({ user }) {
         </table>
       </div>
 
-      {/* Version test */}
-      {/* <div className={styles.container}>
-        <table className={styles.table}>
+      {/* Version mobile */}
+      <div className="block md:hidden relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
+        <table className="w-full text-left table-auto min-w-max">
           <thead>
             <tr>
-              <th className="">
-                <p className="">Utilisateur</p>
-              </th>
               <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                 <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
                   Titre
-                </p>
-              </th>
-              <th className="hidden md:block p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                  Catégorie
                 </p>
               </th>
               <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
@@ -122,11 +114,6 @@ export default async function ListeFrais2({ user }) {
               </th>
               <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                 <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                  Status
-                </p>
-              </th>
-              <th className="hidden md:block p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
                   Action
                 </p>
               </th>
@@ -135,11 +122,6 @@ export default async function ListeFrais2({ user }) {
           <tbody>
             {tickets?.map((ticket) => (
               <tr key={ticket.id}>
-                <td className="hidden md:block p-4 border-b border-blue-gray-50">
-                  <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                    {ticket.user}
-                  </p>
-                </td>
                 <td className="p-4 border-b border-blue-gray-50 ">
                   <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                     <Link
@@ -152,20 +134,12 @@ export default async function ListeFrais2({ user }) {
                     </Link>
                   </p>
                 </td>
-                <td className="hidden md:block p-4 border-b border-blue-gray-50 ">
-                  <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                    {ticket.categorie}
-                  </p>
-                </td>
                 <td className="p-4 border-b border-blue-gray-50 ">
                   <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                     CHF {ticket.prix}
                   </p>
                 </td>
-                <td className="p-4 border-b border-blue-gray-50 ">
-                  <div className={`pill ${ticket.status}`}>{ticket.status}</div>
-                </td>
-                <td className="hidden md:block p-4 border-b border-blue-gray-50">
+                <td className="p-4 border-b border-blue-gray-50">
                   <form action={deleteTicket} className="pl-1">
                     <input type="hidden" name="id" value={ticket.id} />
                     <SubmitButton name={"delete"} />
@@ -178,7 +152,7 @@ export default async function ListeFrais2({ user }) {
             )}
           </tbody>
         </table>
-      </div> */}
+      </div>
     </>
   );
 }
