@@ -2,12 +2,10 @@ import Link from "next/link";
 import { fetchTickets, fetchTicketsByUser } from "../lib/data";
 import { deleteTicket } from "../lib/actions";
 import { SubmitButton } from "../components/Submit-button";
-import styles from "./listeFrais.module.css";
 
-export default async function ListeFrais2({ user }) {
+export default async function ListeFrais2({ query, currentPage, user }) {
   //si utilisateur admin, alors il voit tout, sinon il ne voit que ses tickets.
-  const { tickets } = await fetchTicketsByUser(user);
-
+  const { tickets } = await fetchTicketsByUser(query, currentPage, user);
   // const { tickets } = await fetchTickets();
 
   return (

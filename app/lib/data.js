@@ -27,15 +27,17 @@ export const fetchTickets = async () => {
   }
 };
 
-export const fetchTicketsByUser = async (user) => {
+export const fetchTicketsByUser = async (query, currentPage, user) => {
   noStore();
 
   try {
     connectToDB();
-    // console.log(user);
+    // console.log(query, currentPage, user);
     let tickets = null;
     if (user.role === "admin")
-      tickets = await Ticket.find().sort({ createdAt: -1 });
+      tickets = await Ticket.find({ titre: { $regex: query } }).sort({
+        createdAt: -1,
+      });
     else
       tickets = await Ticket.find({ user: user.username }).sort({
         createdAt: -1,
