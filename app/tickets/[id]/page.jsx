@@ -1,10 +1,18 @@
 import { fetchTicket } from "../../lib/data";
-import { deleteTicket } from "../../lib/actions";
+import { validateTicket, deleteTicket } from "../../lib/actions";
 import { SubmitButton } from "../../components/Submit-button";
 import Link from "next/link";
 import Image from "next/image";
+import { getServerSession } from "next-auth";
+import { options } from "../../api/auth/[...nextauth]/options";
+import { redirect } from "next/navigation";
 
 export default async function TicketDetails({ params }) {
+  const session = await getServerSession(options);
+  if (!session) {
+    redirect("/api/auth/signin?callbackUrl=/tickets");
+  }
+
   const ticket = await fetchTicket(params.id);
 
   // si le tickets est supprimer. A voir pour améliorer
@@ -46,6 +54,75 @@ export default async function TicketDetails({ params }) {
                 <p className={`pill ${ticket.status}`}>{ticket.status}</p>
               </dd>
             </div>
+
+            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt className="text-sm font-medium leading-6 text-gray-900">
+                Visa REPR
+              </dt>
+              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                {(!ticket.visaRepr && (
+                  <div className="flex">
+                    <div className="w-5 h-5 bg-red-600 rounded-full"></div>
+                    {(session.user.role === "repr" ||
+                      session.user.role === "admin") && (
+                      <form action={validateTicket} className="pl-10">
+                        <input type="hidden" name="visa" value="visaRepr" />
+                        <input type="hidden" name="id" value={ticket.id} />
+                        <input type="hidden" name="value" value={true} />
+                        <SubmitButton name={"valider"} />
+                      </form>
+                    )}
+                  </div>
+                )) || (
+                  <div className="flex">
+                    <div className="w-5 h-5 bg-green-600 rounded-full"></div>
+                    {(session.user.role === "repr" ||
+                      session.user.role === "admin") && (
+                      <form action={validateTicket} className="pl-10">
+                        <input type="hidden" name="visa" value="visaRepr" />
+                        <input type="hidden" name="id" value={ticket.id} />
+                        <input type="hidden" name="value" value={false} />
+                        <SubmitButton name={"annuler"} />
+                      </form>
+                    )}
+                  </div>
+                )}
+              </dd>
+            </div>
+
+            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt className="text-sm font-medium leading-6 text-gray-900">
+                Visa direction
+              </dt>
+              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                {(!ticket.visaDir && (
+                  <div className="flex">
+                    <div className="w-5 h-5 bg-red-600 rounded-full"></div>
+                    {session.user.role === "admin" && (
+                      <form action={validateTicket} className="pl-10">
+                        <input type="hidden" name="visa" value="visaDir" />
+                        <input type="hidden" name="id" value={ticket.id} />
+                        <input type="hidden" name="value" value={true} />
+                        <SubmitButton name={"valider"} />
+                      </form>
+                    )}
+                  </div>
+                )) || (
+                  <div className="flex">
+                    <div className="w-5 h-5 bg-green-600 rounded-full"></div>
+                    {session.user.role === "admin" && (
+                      <form action={validateTicket} className="pl-10">
+                        <input type="hidden" name="visa" value="visaDir" />
+                        <input type="hidden" name="id" value={ticket.id} />
+                        <input type="hidden" name="value" value={false} />
+                        <SubmitButton name={"annuler"} />
+                      </form>
+                    )}
+                  </div>
+                )}
+              </dd>
+            </div>
+
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">
                 Date de création

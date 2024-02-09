@@ -13,7 +13,7 @@ export default async function UsersPage() {
     redirect("/api/auth/signin?callbackUrl=/users");
   }
 
-  const { users } = await await fetchUsers(); //pourquoi retourne pas un array ??
+  const { users } = await fetchUsers(); //pourquoi retourne pas un array ??
 
   return (
     <main>

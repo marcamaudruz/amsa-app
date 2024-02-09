@@ -1,21 +1,25 @@
 .container {
-    
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 70%;
   }
   
   .container input,
   .container textarea,
   .container select {
     padding: 20px;
-    background-color: var(--bgSoft);
+    margin-top: 20px;
+    background-color: whitesmoke;
     border-radius: 5px;
     color: var(--textColor);
   }
   
   .container button {
+    align-self: center;
     padding: 20px;
+    margin-top: 20px;
+    background-color: whitesmoke;
     cursor: pointer;
     border-radius: 5px;
+    width: 100px;
   }

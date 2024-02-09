@@ -54,6 +54,8 @@ export const addTicket = async (formData) => {
       desc,
       affaire,
       prix,
+      visaRepr: false,
+      visaDir: false,
       status: "attente",
       img,
       img_public_id,
@@ -70,7 +72,7 @@ export const addTicket = async (formData) => {
 };
 
 export const addUser = async (formData) => {
-  const { username, email, password_from_field, isAdmin } =
+  const { username, email, password_from_field, role, dpt, isAdmin } =
     Object.fromEntries(formData);
 
   // Connect to DB
@@ -82,6 +84,8 @@ export const addUser = async (formData) => {
       username,
       email,
       password,
+      role,
+      dpt,
       phone: 1,
       isAdmin,
       isActive: true,
@@ -114,4 +118,23 @@ export const deleteTicket = async (formData) => {
     throw new Error("Failed to delete ticket!");
   }
   revalidatePath("/tickets");
+};
+
+export const validateTicket = async (formData) => {
+  const { id, visa, value } = Object.fromEntries(formData);
+  try {
+    connectToDB();
+    const ticket = await Ticket.findById(id);
+
+    if (visa === "visaRepr") {
+      await Ticket.findByIdAndUpdate(id, { visaRepr: value });
+    } else if (visa === "visaDir") {
+      await Ticket.findByIdAndUpdate(id, { visaDir: value });
+    }
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to update ticket!");
+  }
+  revalidatePath("/tickets");
+  redirect("/tickets");
 };

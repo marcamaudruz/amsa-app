@@ -1,7 +1,5 @@
 import { addTicket } from "../../lib/actions";
 import { SubmitButton } from "../../components/Submit-button";
-import { put } from "@vercel/blob";
-import { revalidatePath } from "next/cache";
 
 export default function CreateForm({ user }) {
   console.log(user.username);
@@ -9,6 +7,9 @@ export default function CreateForm({ user }) {
     <div className="grid place-items-center">
       <form action={addTicket} className="w-full max-w-sm">
         <input type="hidden" name="user" value={user.username} />
+
+        {/* si repr alors visaRepr true */}
+
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3">
             <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
@@ -86,14 +87,6 @@ export default function CreateForm({ user }) {
             </label>
           </div>
           <div className="md:w-2/3">
-            {/* <input
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              required
-              type="file"
-              name="file"
-            /> */}
-            {/* <BlobComp /> */}
-
             <input
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               type="file"

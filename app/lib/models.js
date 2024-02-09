@@ -18,6 +18,13 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    role: {
+      type: String,
+      default: "user",
+    },
+    dpt: {
+      type: String,
+    },
     img: {
       type: String,
     },
@@ -61,6 +68,14 @@ const ticketSchema = new mongoose.Schema(
       type: Number,
       required: true,
       min: 0,
+    },
+    visaRepr: {
+      type: Boolean,
+      default: false,
+    },
+    visaDir: {
+      type: Boolean,
+      default: false,
     },
     status: {
       type: String,

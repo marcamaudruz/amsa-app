@@ -35,11 +35,15 @@ export const fetchTicketsByUser = async (query, currentPage, user) => {
     // console.log(query, currentPage, user);
     let tickets = null;
     if (user.role === "admin")
-      tickets = await Ticket.find({ titre: { $regex: query } }).sort({
+      tickets = await Ticket.find({
+        $or: [{ titre: { $regex: query } }, { user: { $regex: query } }],
+      }).sort({
         createdAt: -1,
       });
     else
-      tickets = await Ticket.find({ user: user.username }).sort({
+      tickets = await Ticket.find({
+        $and: [{ user: user.username }, { titre: { $regex: query } }],
+      }).sort({
         createdAt: -1,
       });
     // console.log(tickets);
@@ -96,5 +100,24 @@ export const seed = async () => {
   } catch (err) {
     console.log(err);
     throw new Error("Failed to create ticket!");
+  }
+};
+
+export const fetchValidatedTicketsByUser = async (user) => {
+  noStore();
+
+  try {
+    connectToDB();
+    // console.log(query, currentPage, user);
+    let tickets = await Ticket.find({
+      $and: [{ user: user.username }, { visaRepr: true }, { visaDir: true }],
+    }).sort({
+      createdAt: -1,
+    });
+    // console.log(tickets);
+    return { tickets };
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch tickets!");
   }
 };

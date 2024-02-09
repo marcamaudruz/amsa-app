@@ -78,7 +78,25 @@ export default async function ListeFrais2({ query, currentPage, user }) {
                   </p>
                 </td>
                 <td className="p-4 border-b border-blue-gray-50 ">
-                  <div className={`pill ${ticket.status}`}>{ticket.status}</div>
+                  <div className="flex">
+                    <div>
+                      {(!ticket.visaRepr && (
+                        <div className="w-5 h-5 bg-red-600 rounded-full"></div>
+                      )) || (
+                        <div className="w-5 h-5 bg-green-600 rounded-full"></div>
+                      )}
+                    </div>
+                    <div>
+                      {(!ticket.visaDir && (
+                        <div className="ml-2 w-5 h-5 bg-red-600 rounded-full"></div>
+                      )) || (
+                        <div className="ml-2 w-5 h-5 bg-green-600 rounded-full"></div>
+                      )}
+                    </div>
+                    <div className={`ml-4 pill ${ticket.status}`}>
+                      {ticket.status}
+                    </div>
+                  </div>
                 </td>
                 <td className="p-4 border-b border-blue-gray-50">
                   <form action={deleteTicket} className="pl-1">
@@ -107,7 +125,7 @@ export default async function ListeFrais2({ query, currentPage, user }) {
               </th>
               <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                 <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                  Montant
+                  Status
                 </p>
               </th>
               <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
@@ -133,9 +151,22 @@ export default async function ListeFrais2({ query, currentPage, user }) {
                   </p>
                 </td>
                 <td className="p-4 border-b border-blue-gray-50 ">
-                  <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                    CHF {ticket.prix}
-                  </p>
+                  <div className="flex">
+                    <div>
+                      {(!ticket.visaRepr && (
+                        <div className="w-5 h-5 bg-red-600 rounded-full"></div>
+                      )) || (
+                        <div className="w-5 h-5 bg-green-600 rounded-full"></div>
+                      )}
+                    </div>
+                    <div>
+                      {(!ticket.visaDir && (
+                        <div className="ml-2 w-5 h-5 bg-red-600 rounded-full"></div>
+                      )) || (
+                        <div className="ml-2 w-5 h-5 bg-green-600 rounded-full"></div>
+                      )}
+                    </div>
+                  </div>
                 </td>
                 <td className="p-4 border-b border-blue-gray-50">
                   <form action={deleteTicket} className="pl-1">
