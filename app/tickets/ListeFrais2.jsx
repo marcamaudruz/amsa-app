@@ -125,12 +125,12 @@ export default async function ListeFrais2({ query, currentPage, user }) {
               </th>
               <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                 <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                  Status
+                  Prix
                 </p>
               </th>
               <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                 <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                  Action
+                Status
                 </p>
               </th>
             </tr>
@@ -150,6 +150,12 @@ export default async function ListeFrais2({ query, currentPage, user }) {
                     </Link>
                   </p>
                 </td>
+                
+                <td className="p-4 border-b border-blue-gray-50">
+                <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                    CHF {ticket.prix}
+                  </p>
+                </td>
                 <td className="p-4 border-b border-blue-gray-50 ">
                   <div className="flex">
                     <div>
@@ -167,12 +173,6 @@ export default async function ListeFrais2({ query, currentPage, user }) {
                       )}
                     </div>
                   </div>
-                </td>
-                <td className="p-4 border-b border-blue-gray-50">
-                  <form action={deleteTicket} className="pl-1">
-                    <input type="hidden" name="id" value={ticket.id} />
-                    <SubmitButton name={"delete"} />
-                  </form>
                 </td>
               </tr>
             ))}
