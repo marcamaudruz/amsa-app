@@ -1,3 +1,4 @@
+import { user } from "@nextui-org/react";
 import { Ticket, User } from "./models";
 import { connectToDB } from "./utils";
 import { unstable_noStore as noStore } from "next/cache";
@@ -100,6 +101,32 @@ export const seed = async () => {
   } catch (err) {
     console.log(err);
     throw new Error("Failed to create ticket!");
+  }
+};
+
+export const countValidatedTicketsByUser = async () => {
+  noStore();
+  try {
+    let list = [];
+    connectToDB();
+    const users = await User.find();
+    users.forEach((user) => {
+      list.push({ user: user.username, numberOfTickets: 0 });
+    });
+    const tickets = await Ticket.find({
+      $and: [{ visaRepr: true }, { visaDir: true }],
+    });
+    tickets.forEach((ticket) => {
+      for (const i of list) {
+        if (i.user == ticket.user) {
+          i.numberOfTickets += 1;
+        }
+      }
+    });
+    return list;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch tickets!");
   }
 };
 

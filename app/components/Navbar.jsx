@@ -81,6 +81,15 @@ export default function Navbar() {
                     Utilisateurs
                   </Link>
                 </li>
+
+                {session?.user.role === "admin" && (
+                  <li className="text-white">
+                    <Link href="/admin" onClick={() => setNavbar(!navbar)}>
+                      Admin
+                    </Link>
+                  </li>
+                )}
+
                 {session ? (
                   <li className="text-white">
                     <Link

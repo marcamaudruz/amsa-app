@@ -1,48 +1,28 @@
-"use client";
-
-import { useState } from "react";
+import { countValidatedTicketsByUser } from "../lib/data";
 
 const Admin = async () => {
-  const [task, setTask] = useState("");
-  const [tasksArray, setTasksArray] = useState([]);
-
-  const inputChange = (e) => {
-    // setTask(e.target.value);
-  };
-
-  const inputSubmit = (e) => {
-    e.preventDefault();
-    if (task.trim()) {
-      setTasksArray([...tasksArray, task]);
-      setTask("");
-    }
-  };
-
-  const handleDelete = (index) => {
-    setTasksArray(tasksArray.filter((_, i) => i !== index));
-  };
-
+  const list = await countValidatedTicketsByUser();
+  console.log("in page", list);
   return (
     <>
       <div>
-        <h1> To-do List in Next.js </h1>
-        <form onSubmit={inputSubmit}>
-          <input
-            type="text"
-            value={task}
-            onChange={inputChange}
-            placeholder="Enter a task"
-          />
-          <button type="submit">Add task</button>
-        </form>
-        <ul>
-          {tasksArray.map((task, index) => (
-            <li key={index}>
-              {task}
-              <button onClick={() => handleDelete(index)}>Delete</button>
-            </li>
-          ))}
-        </ul>
+        <h1>Admin page</h1>
+        <div className="flex justify-center mt-10">
+          <div className="w-3/4 border border-red-50">
+            {list?.map((item) => (
+              <div
+                key={item.user}
+                className="flex h-10 border border-blue-gray-50 mt-5"
+              >
+                <div className="ml-2 flex w-1/3">{item.user}</div>
+                <div className="flex w-1/3">{item.numberOfTickets}</div>
+                {item.numberOfTickets > 0 && (
+                  <div className="flex w-1/3">link</div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </>
   );
