@@ -6,10 +6,15 @@ const Admin = async () => {
   console.log("in page", list);
   return (
     <>
-      <div>
-        <h1>Admin page</h1>
+      <main>
+        <nav>
+          <div>
+            <h1>Admin page</h1>
+          </div>
+        </nav>
+
         <div className="flex justify-center mt-10">
-          <div className="w-3/4 border border-red-50">
+          <div className="w-full border border-red-50">
             {list?.map((item) => (
               <div
                 key={item.user}
@@ -22,7 +27,8 @@ const Admin = async () => {
                     <Link
                       href={`/admin/${item.user}`}
                       className="hover:text-red-800"
-                    >Note de frais
+                    >
+                      Note de frais
                     </Link>
                   </div>
                 )}
@@ -30,7 +36,7 @@ const Admin = async () => {
             ))}
           </div>
         </div>
-      </div>
+      </main>
     </>
   );
 };

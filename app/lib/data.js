@@ -135,14 +135,14 @@ export const fetchValidatedTicketsByUser = async (user) => {
 
   try {
     connectToDB();
-    // console.log(query, currentPage, user);
+    // console.log(user);
     let tickets = await Ticket.find({
-      $and: [{ user: user.username }, { visaRepr: true }, { visaDir: true }],
+      $and: [{ user: user }, { visaRepr: true }, { visaDir: true }],
     }).sort({
       createdAt: -1,
     });
     // console.log(tickets);
-    return { tickets };
+    return tickets;
   } catch (err) {
     console.log(err);
     throw new Error("Failed to fetch tickets!");
