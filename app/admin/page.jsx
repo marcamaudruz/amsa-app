@@ -1,4 +1,5 @@
 import { countValidatedTicketsByUser } from "../lib/data";
+import Link from "next/link";
 
 const Admin = async () => {
   const list = await countValidatedTicketsByUser();
@@ -17,7 +18,13 @@ const Admin = async () => {
                 <div className="ml-2 flex w-1/3">{item.user}</div>
                 <div className="flex w-1/3">{item.numberOfTickets}</div>
                 {item.numberOfTickets > 0 && (
-                  <div className="flex w-1/3">link</div>
+                  <div className="flex w-1/3">
+                    <Link
+                      href={`/admin/${item.user}`}
+                      className="hover:text-red-800"
+                    >Note de frais
+                    </Link>
+                  </div>
                 )}
               </div>
             ))}

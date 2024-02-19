@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { fetchTickets, fetchTicketsByUser } from "../lib/data";
+import { fetchTicketsByUser } from "../lib/data";
 import { deleteTicket } from "../lib/actions";
 import { SubmitButton } from "../components/Submit-button";
 
