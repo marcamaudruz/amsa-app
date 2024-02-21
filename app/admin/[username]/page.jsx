@@ -21,13 +21,10 @@ const NoteDeFrais = async ({ params }) => {
             <h1>Page de note de frais</h1>
           </div>
         </nav>
-
-        <div className="flex justify-center mt-10">
-          <div className="w-full">
             {tickets?.map((ticket) => (
               <div
                 key={ticket.user}
-                className="flex border border-blue-gray-50 mt-5"
+                className="shadow-md rounded flex border border-blue-gray-50 mt-5"
               >
                 <div className="ml-2 flex w-1/3">{ticket.titre}</div>
                 <div className="flex w-1/3">{ticket.prix}</div>
@@ -45,8 +42,6 @@ const NoteDeFrais = async ({ params }) => {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
         <div className="flex justify-center mt-10">
           <p>Total de la note de frais: {total}</p>
         </div>

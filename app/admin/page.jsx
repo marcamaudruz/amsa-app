@@ -12,30 +12,26 @@ const Admin = async () => {
             <h1>Admin page</h1>
           </div>
         </nav>
-
-        <div className="flex justify-center mt-10">
-          <div className="w-full border border-red-50">
-            {list?.map((item) => (
-              <div
-                key={item.user}
-                className="flex h-10 border border-blue-gray-50 mt-5"
-              >
-                <div className="ml-2 flex w-1/3">{item.user}</div>
-                <div className="flex w-1/3">{item.numberOfTickets}</div>
-                {item.numberOfTickets > 0 && (
-                  <div className="flex w-1/3">
-                    <Link
-                      href={`/admin/${item.user}`}
-                      className="hover:text-red-800"
-                    >
-                      Note de frais
-                    </Link>
-                  </div>
-                )}
+        {list?.map((item) => (
+          <div
+            key={item.user}
+            className="shadow-md rounded flex h-10 border border-blue-gray-50 mt-5"
+          >
+            <div className="ml-4 flex items-center w-52">{item.user}</div>
+            <div className="flex items-center w-52">Total frais: {item.numberOfTickets}</div>
+            {item.numberOfTickets > 0 && (
+              <div className="flex items-center">
+                <Link
+                  href={`/admin/${item.user}`}
+                  className="hover:text-red-800"
+                >
+                  Note de frais
+                </Link>
               </div>
-            ))}
+            )}
+            
           </div>
-        </div>
+        ))}
       </main>
     </>
   );
