@@ -1,0 +1,24 @@
+
+.listeFrais {
+  margin-top: 20px;  
+  font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .listeFrais td, .listeFrais th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .listeFrais tr:nth-child(even){background-color: #f2f2f2;}
+  
+  .listeFrais tr:hover {background-color: #ddd;}
+  
+  .listeFrais th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #742a2a;
+    color: white;
+  }
